@@ -83,13 +83,14 @@ function NavBar() {
             <AppBar color="primary" position="sticky" >
                 <Toolbar  >
                     <IconButton
+                        onClick={toggleDrawer('left',true)}
                         size="large"
                         edge="end"
                         color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2}}
                     >
-                        <MenuIcon onClick={toggleDrawer('left',true)}/>
+                        <MenuIcon />
                         <Drawer
                             anchor={'left'}
                             open={state['left']}

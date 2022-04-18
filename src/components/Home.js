@@ -29,13 +29,9 @@ function Home() {
                return(
 
                    <div key={splcoff.id}>
-                       <h2> English : {splcoff.english}</h2>
-                       <h2> Arabic : {splcoff.arabic}</h2>
-                       <h2> Price : {splcoff.price} AED</h2>
-                       <img src={splcoff.picture} alt="menu"/>
-
-                           <MenuCard/>
-
+                            <br/>
+                           <MenuCard eng ={splcoff.english} ar ={splcoff.arabic} pric = {splcoff.price} pic = {splcoff.picture}/>
+                            <br/>
                    </div>
                );})
             }

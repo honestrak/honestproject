@@ -1,42 +1,51 @@
 import {Box, Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
 
-function MenuCard() {
+function MenuCard(props) {
+
+
+
  return (
+
   <Box
       sx={{
-       display: 'flex',
+       display: 'flexGrow',
        backgroundColor: 'primary.dark',
        '&:hover': {
-        backgroundColor: 'primary.main',
+        backgroundColor: 'beige',
         opacity: [0.9, 0.8, 0.7],
         p: 2,
        },
       }}
   >
 
-   <Card sx={{ minWidth: 345 }}>
+   <Card >
     <CardMedia
         component="img"
         height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
+        image={props.pic}
         alt="green iguana"
     />
     <CardContent>
      <Typography gutterBottom variant="h5" component="div">
-      Lizard
+      {props.eng}
      </Typography>
-     <Typography variant="body2" color="text.secondary">
-      Lizards are a
+     <Typography variant="h4" component="div" color="cadetblue">
+      {props.ar}
+     </Typography>
+     <Typography variant="h8"  component="div" color="darkred">
+      {props.pric} AED
      </Typography>
     </CardContent>
     <CardActions>
-     <Button size="small">Share</Button>
      <Button size="small">Learn More</Button>
     </CardActions>
    </Card>
 
   </Box>
+
+
  );
+
  }
 
  export default MenuCard;
