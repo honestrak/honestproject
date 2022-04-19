@@ -1,0 +1,14 @@
+html{
+    background-color: rgba(111, 124, 141, 0.85);
+   /* display: table;*/
+    margin: auto;
+
+}
+body {
+    background-color: #f0f0f5;
+   /* display: table-cell;
+    vertical-align: middle;*/
+
+    max-width: max-content;
+    margin: auto;
+}

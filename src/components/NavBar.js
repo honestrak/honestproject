@@ -1,20 +1,19 @@
 import {
     AppBar,
     Box,
-    Button, Divider, Drawer,
+    Divider,
     IconButton,
     List,
     ListItem,
-    ListItemIcon, ListItemText,
+    ListItemIcon, ListItemText, SwipeableDrawer,
     ThemeProvider,
     Toolbar,
-    Typography
+    Typography,
 } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { createTheme } from '@mui/material/styles';
-import blue from '@mui/material/colors/blue';
-import {deepOrange, green} from "@mui/material/colors";
-import {useEffect, useState} from "react";
+import {deepOrange} from "@mui/material/colors";
+import {useState} from "react";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
@@ -26,6 +25,7 @@ const theme = createTheme({
         secondary: deepOrange,
     },
 });
+
 
 function NavBar() {
 
@@ -48,8 +48,8 @@ function NavBar() {
         <Box
             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
             role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
+            onClick={toggleDrawer('left', false)}
+            onKeyDown={toggleDrawer('left', false)}
         >
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -77,9 +77,12 @@ function NavBar() {
 
 
 
+
+
     return (
         <ThemeProvider theme={theme}>
         <Box  sx={{ flexGrow: 1 }}>
+
             <AppBar color="primary" position="sticky" >
                 <Toolbar  >
                     <IconButton
@@ -91,13 +94,14 @@ function NavBar() {
                         sx={{ mr: 2}}
                     >
                         <MenuIcon />
-                        <Drawer
+                        <SwipeableDrawer
                             anchor={'left'}
                             open={state['left']}
                             onClose={toggleDrawer('left', false)}
+                            onOpen={toggleDrawer('left', true)}
                         >
                             {list('left')}
-                        </Drawer>
+                        </SwipeableDrawer>
 
                     </IconButton>
 
@@ -108,6 +112,15 @@ function NavBar() {
 
                 </Toolbar>
             </AppBar>
+
+
+            <AppBar position="fixed">
+                <Toolbar>{/* content */}</Toolbar>
+            </AppBar>
+            <Toolbar />
+
+
+
         </Box>
         </ThemeProvider>
 
