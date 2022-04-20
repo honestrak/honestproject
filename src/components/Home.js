@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
-import { db }from '../firebase-config';
-import { collection, getDocs }from 'firebase/firestore';
+import {db} from '../firebase-config';
+import {collection, getDocs} from 'firebase/firestore';
 import MenuCard from "./Menucard";
-import {Box, CircularProgress, Container, ThemeProvider, Typography} from "@mui/material";
+import {Box, CircularProgress, Container, Stack, ThemeProvider, Typography} from "@mui/material";
 import {createTheme} from "@mui/material/styles";
 import {deepOrange} from "@mui/material/colors";
-import NaviBar from "./NaviBar";
+import TopBar from "./TopBar";
+
 
 const theme = createTheme({
     palette: {
@@ -17,61 +18,87 @@ const theme = createTheme({
 });
 
 function Home() {
-    const [splcoffee,setSpecialCoffee] = useState([]);
+    const [splcoffee, setSpecialCoffee] = useState([]);
     const [loading, setLoading] = useState(false);
-    const chevalCollRef = collection(db,"desserts");
+    const chevalCollRef = collection(db, "desserts");
+    let length = 0;
 
     useEffect(() => {
-        const getCoffee = async () => {
-        const data  = await getDocs(chevalCollRef);
-        setSpecialCoffee(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+        const getCoffee = async (e) => {
+            const data = await getDocs(chevalCollRef);
+            setSpecialCoffee(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+
+            console.log(data.docs.length);
+            length = data.docs.length;
         }
 
 
-        getCoffee().then(()=>setLoading(true))
-    },[]);
+        getCoffee().then(
+            () => {
+                if (length > 0)
+                    setLoading(true);
+                else
+                    setLoading(false);
+            }
+        )
+    }, []);
 
     return <div>
         <header>
-            <NaviBar/>
+            <TopBar/>
         </header>
 
-        <>
 
+        <>
+            {loading ? '' :
+
+                    <Box sx={{ display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: {xs: 'center', md: 'center'},
+                        height:'85vh',
+                        minWidth :{
+                        xs:400,
+                            md:700,
+                            xl:900
+                        }
+
+
+                    }}>
+
+                        <CircularProgress/>
+
+                    </Box>
+
+            }
+        </>
+
+        <>
 
 
             {
-             splcoffee.map((splcoff) => {
-               return(
+                splcoffee.map((splcoff) => {
+                    return (
 
-                   <div key={splcoff.id}>
+                        <div key={splcoff.id}>
                             <br/>
-                           <MenuCard eng ={splcoff.english} ar ={splcoff.arabic} pric = {splcoff.price} pic = {splcoff.picture}/>
+                            <MenuCard eng={splcoff.english} ar={splcoff.arabic} pric={splcoff.price}
+                                      pic={splcoff.picture}/>
                             <br/>
-                   </div>
-               );})
+                        </div>
+                    );
+                })
             }
         </>
-        <>
-            {loading ? '' :
-            <Container fixed>
-                <Box sx={{ bgcolor: '#afd4f3', height: '100vh' , minWidth: { xs: 350, md: 600 }}} >
 
-                <CircularProgress  />
-
-                </Box>
-            </Container>
-                }
-        </>
 
         <ThemeProvider theme={theme}>
-        <footer>
-            <Box sx={{ bgcolor: 'primary.main',  mt:2 ,p:2}} >
-                <Typography variant="body1" color='white' align='center'>
-                    All Rights Reserved @ Cheval_Cafe
-                </Typography>;
-            </Box>
-        </footer>
+            <footer >
+                <Box sx={{bgcolor: 'primary.main', mt: 1, p: 1}}>
+                    <Typography variant="body1" color='white' align='center'>
+                        All Rights Reserved @ Cheval_Cafe
+                    </Typography>;
+                </Box>
+            </footer>
         </ThemeProvider>
 
     </div>

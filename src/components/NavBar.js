@@ -83,7 +83,7 @@ function NavBar() {
         <ThemeProvider theme={theme}>
         <Box  sx={{ flexGrow: 1 }}>
 
-            <AppBar color="primary" position="sticky" >
+            <AppBar color="primary" position="static" >
                 <Toolbar  >
                     <IconButton
                         onClick={toggleDrawer('left',true)}

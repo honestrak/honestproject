@@ -3,6 +3,7 @@ html{
    /* display: table;*/
     margin: auto;
 
+
 }
 body {
     background-color: #f0f0f5;
@@ -11,4 +12,5 @@ body {
 
     max-width: max-content;
     margin: auto;
+    padding-top: 75px;
 }

@@ -37,7 +37,6 @@ ElevationScroll.propTypes = {
 export default function NavBar2(props) {
     return (
         <React.Fragment>
-            <CssBaseline />
             <ElevationScroll {...props}>
                 <AppBar>
 
