@@ -1,15 +1,12 @@
 html{
     background-color: rgba(111, 124, 141, 0.85);
-   /* display: table;*/
     margin: auto;
+    display: flex;
 
 
 }
 body {
-    background-color: #f0f0f5;
-   /* display: table-cell;
-    vertical-align: middle;*/
-
+    display: flex;
     max-width: max-content;
     margin: auto;
     padding-top: 75px;

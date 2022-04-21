@@ -17,7 +17,7 @@ const theme = createTheme({
     },
 });
 
-function Home() {
+function Menu() {
     const [splcoffee, setSpecialCoffee] = useState([]);
     const [loading, setLoading] = useState(false);
     const chevalCollRef = collection(db, "desserts");
@@ -31,7 +31,6 @@ function Home() {
             console.log(data.docs.length);
             length = data.docs.length;
         }
-
 
         getCoffee().then(
             () => {
@@ -107,4 +106,4 @@ function Home() {
 }
 
 
-export default Home;
+export default Menu;
