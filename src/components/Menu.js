@@ -90,15 +90,7 @@ function Menu() {
         </>
 
 
-        <ThemeProvider theme={theme}>
-            <footer >
-                <Box sx={{bgcolor: 'primary.main', mt: 1, p: 1}}>
-                    <Typography variant="body1" color='white' align='center'>
-                        All Rights Reserved @ Cheval_Cafe
-                    </Typography>;
-                </Box>
-            </footer>
-        </ThemeProvider>
+
 
     </div>
 
