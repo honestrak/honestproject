@@ -8,17 +8,17 @@ function Home(props) {
     const naviItems = props.naviItems;
 
     console.log(naviItems);
-    let naviCategory = "food";
+
 
     let navigate = useNavigate();
 
 
-    async function routeChange(event) {
-        event.preventDefault();
-
+    const toComponentB = (catitem) => {
         let path = `category`;
-        navigate(path,{state:{name:naviCategory}});
-    }
+        navigate(path, { state: { id: 1, name: catitem} });
+    };
+
+
 
 
     return (<div>
@@ -27,7 +27,7 @@ function Home(props) {
             justifyContent: 'center',
             alignItems: {xs: 'center', md: 'center'},
             height: '85vh',
-            bgcolor: 'rgba(189,203,224,0.89)',
+            bgcolor: 'rgb(252,252,252)',
             minWidth: {
                 xs: 400,
                 md: 700,
@@ -37,17 +37,14 @@ function Home(props) {
         >
 
             <h2>
+
                 {naviItems.map((navi_items) => (
-
-
-
-
                 <Card sx={{
                     minWidth: 345, borderRadius: '12px',
                     margin: 5,
                     boxShadow: 2,
                 }}>
-                    <CardActionArea onClick={routeChange} id={navi_items.id} >
+                    <CardActionArea onClick={() => toComponentB(navi_items.title)}>
                         <CardMedia
                             component="img"
                             height="140"
@@ -59,14 +56,10 @@ function Home(props) {
 
                                 {navi_items.title}
 
-
                             </Typography>
                         </CardContent>
                     </CardActionArea>
 
-                    <div>
-                        {naviCategory = navi_items.title}
-                    </div>
                 </Card>
 
                                     ))}

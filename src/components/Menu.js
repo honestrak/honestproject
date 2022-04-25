@@ -6,6 +6,8 @@ import {Box, CircularProgress, Container, Stack, ThemeProvider, Typography} from
 import {createTheme} from "@mui/material/styles";
 import {deepOrange} from "@mui/material/colors";
 import TopBar from "./TopBar";
+import CategoryList from "./CategoryList";
+import {useLocation} from "react-router-dom";
 
 
 const theme = createTheme({
@@ -22,6 +24,8 @@ function Menu() {
     const [loading, setLoading] = useState(false);
     const chevalCollRef = collection(db, "desserts");
     let length = 0;
+
+    const location = useLocation();
 
     useEffect(() => {
         const getCoffee = async (e) => {
@@ -47,6 +51,9 @@ function Menu() {
             <TopBar/>
         </header>
 
+        <>
+            <CategoryList/>
+        </>
 
         <>
             {loading ? '' :
