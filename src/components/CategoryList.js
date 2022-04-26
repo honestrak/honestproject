@@ -12,7 +12,9 @@ function CategoryList(props) {
 
     return (
         <div>
-            <Stack justifyContent="center"
+            <Stack
+
+                justifyContent="center"
                    alignItems="center"
                    direction="row"
                    sx={{p: 1}}

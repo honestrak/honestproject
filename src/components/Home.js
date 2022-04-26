@@ -14,7 +14,7 @@ function Home(props) {
 
 
     const toComponentB = (catitem) => {
-        let path = `category`;
+        let path = `menu`;
         navigate(path, { state: { id: 1, name: catitem} });
     };
 
