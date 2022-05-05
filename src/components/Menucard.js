@@ -62,7 +62,7 @@ function MenuCard(props) {
             mr: 5,
 
         }}>
-            <CardActionArea>
+            <CardActionArea onClick={() => console.log("welcome")}>
                 <Box
                     sx={{
                         display: 'inline-flex',

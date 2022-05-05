@@ -23,12 +23,18 @@ function Menu() {
     const [splcoffee, setSpecialCoffee] = useState([]);
     const [loading, setLoading] = useState(false);
     const chevalCollRef = collection(db, "desserts");
+    const [name, setName] = useState('xcateg');
+
+
+    const getDate = (data) =>{
+        console.log("this okay " +data);
+    };
 
     let length = 0;
 
     const location = useLocation();
     const cateType = location.state.name.toLowerCase();
-    const refCategoryList = collection(db, "xcateg");
+    const refCategoryList = collection(db, name);
     console.log(cateType);
     const categFilter = query(refCategoryList, where("type", "==", cateType))
     const [categoryList, setCategoryList] = useState([]);

@@ -1,4 +1,5 @@
 import {Avatar, IconButton, Paper, Stack, styled, Typography} from "@mui/material";
+import {useCallback} from "react";
 
 function CategoryList(props) {
 
@@ -9,6 +10,13 @@ function CategoryList(props) {
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
+
+
+
+
+    function onCategory(categ) {
+        console.log(categ);
+    }
 
     return (
         <div>
@@ -22,10 +30,10 @@ function CategoryList(props) {
 
 
                             <div key={props.id}>
-                                <IconButton sx={{flexDirection: "column"}} aria-label="hskslsls" onClick={() => console.log("hi")}>
+                                <IconButton sx={{flexDirection: "column"}} aria-label="hskslsls" onClick={() => onCategory(props.english)}>
                                     <Avatar
                                         sx={{bgcolor:'#f8f8f8', width: 48, height: 48 , p:2}}
-                                        src="https://cdn-icons.flaticon.com/png/512/3188/premium/3188277.png?token=exp=1650875699~hmac=b8a3a4f11d536166f7280db060a63188">C</Avatar>
+                                        src="https://cdn1.iconfinder.com/data/icons/ecommerce-vol1-flat-bukeicon/32/burger_food_category_ecommerce_bukeicon_online_shop-512.png">C</Avatar>
                                     <Typography variant="body1" color='red' align='center'>
                                         {props.english}
                                     </Typography>
