@@ -65,13 +65,13 @@ function MenuCard(props) {
             <CardActionArea onClick={() => console.log("welcome")}>
                 <Box
                     sx={{
-                        display: 'inline-flex',
+                        display: 'flex',
                         flexDirection: {xs: 'column', md: 'row'},
                         alignItems: 'center',
                         overflow: 'hidden',
                         borderRadius: '12px',
                         boxShadow: 2,
-                        bgcolor: '#f2f5f6',
+                        bgcolor: '#f5f5f5',
                         '&:hover': {
                             backgroundColor: '#ffffff',
                             opacity: [0.9, 0.8, 0.7],
@@ -88,6 +88,7 @@ function MenuCard(props) {
                             boxShadow: 2,
                             maxHeight: {xs: 250, md: 170},
                             maxWidth: {xs: 350, md: 350},
+
                         }}
                         alt="pic"
                         src={props.pic}

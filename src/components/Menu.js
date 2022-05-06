@@ -2,10 +2,9 @@ import {useEffect, useState} from "react";
 import {db} from '../firebase-config';
 import {collection, getDocs, query, where} from 'firebase/firestore';
 import MenuCard from "./Menucard";
-import {Box, CircularProgress, Container, Stack, ThemeProvider, Typography} from "@mui/material";
+import {Box, CircularProgress, Container, Stack} from "@mui/material";
 import {createTheme} from "@mui/material/styles";
 import {deepOrange} from "@mui/material/colors";
-import TopBar from "./TopBar";
 import CategoryList from "./CategoryList";
 import {useLocation} from "react-router-dom";
 
@@ -22,24 +21,68 @@ const theme = createTheme({
 function Menu() {
     const [splcoffee, setSpecialCoffee] = useState([]);
     const [loading, setLoading] = useState(false);
-    const chevalCollRef = collection(db, "desserts");
-    const [name, setName] = useState('xcateg');
 
+    const [name, setName] = useState('desserts');
+    const [topCategory, setTopCategory] = useState('');
 
-    const getDate = (data) =>{
-        console.log("this okay " +data);
-    };
+    const chevalCollRef = collection(db, name);
+
 
     let length = 0;
 
     const location = useLocation();
     const cateType = location.state.name.toLowerCase();
-    const refCategoryList = collection(db, name);
-    console.log(cateType);
+    const refCategoryList = collection(db, "xcateg");
+   // console.log(cateType);
     const categFilter = query(refCategoryList, where("type", "==", cateType))
     const [categoryList, setCategoryList] = useState([]);
 
+
+
     useEffect(() => {
+        console.log("useeff_category");
+        const getCategoryList = async (e) => {
+            const querySnapshot = await getDocs(categFilter);
+
+            setCategoryList(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
+
+            console.log("abcd " + categoryList.length);
+        }
+
+        getCategoryList()
+            .then(
+            () => {
+
+                console.log("lengt " + categoryList.length);
+
+                console.log("0th  pos  " + categoryList[0]);
+                const first = categoryList[0];
+
+
+                setName(first.link);
+
+                if (length > 0) {
+
+                    setLoading(false);
+
+                } else {
+                    setLoading(true);
+                }
+
+            }
+        ).finally(
+            ()=>{
+                console.log("finally " + categoryList.length);
+            }
+        )
+
+        console.log("zcxef " + categoryList.length);
+    }, [cateType]);
+
+
+    useEffect(() => {
+
+     //   console.log("useeffect: " + name);
         const getCoffee = async (e) => {
             const data = await getDocs(chevalCollRef);
             setSpecialCoffee(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
@@ -56,26 +99,8 @@ function Menu() {
                     setLoading(false);
             }
         )
-    }, []);
+    }, [name, cateType]);
 
-
-    useEffect(() => {
-        const getCategoryList = async (e) => {
-            const querySnapshot = await getDocs(categFilter);
-
-            setCategoryList(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
-
-        }
-
-        getCategoryList().then(
-            () => {
-                if (length > 0)
-                    setLoading(true);
-                else
-                    setLoading(false);
-            }
-        )
-    }, []);
 
     return <div>
 
@@ -93,34 +118,38 @@ function Menu() {
         }}
         >
 
-        <Stack justifyContent="center"
-               alignItems="center"
-               direction="row"
-               alignItems="stretch"
-               sx={{display: 'flex',
-                   overflow: 'scroll',
-                   p: 1}}
-               spacing={2}>
-            {
-                categoryList.map((category) => {
-                    return (
-                            <CategoryList  english={category.english} />
-                    );
-                })
-            }
-        </Stack>
+            <Stack justifyContent="center"
+                   alignItems="center"
+                   direction="row"
+                   alignItems="stretch"
+                   sx={{
+                       display: 'flex',
+                       overflow: 'scroll',
+                       p: 1
+                   }}
+                   spacing={2}>
+                {
+                    categoryList.map((category, index) => {
+                        return (
+                            <CategoryList setName={setName} id={index} english={category.english}
+                                          links={category.link}/>
+                        );
+                    })
+                }
+            </Stack>
 
-        <>
-            {loading ? '' :
+            <>
+                {loading ? '' :
 
-                    <Box sx={{ display: 'flex',
+                    <Box sx={{
+                        display: 'flex',
                         justifyContent: 'center',
                         alignItems: {xs: 'center', md: 'center'},
-                        height:'85vh',
-                        minWidth :{
-                        xs:400,
-                            md:700,
-                            xl:900
+                        height: '85vh',
+                        minWidth: {
+                            xs: 400,
+                            md: 700,
+                            xl: 900
                         }
 
 
@@ -130,29 +159,31 @@ function Menu() {
 
                     </Box>
 
-            }
-        </>
+                }
+            </>
 
-        <>
-
-
-            {
-                splcoffee.map((splcoff) => {
-                    return (
-
-                        <div key={splcoff.id}>
-                            <br/>
-                            <MenuCard eng={splcoff.english} ar={splcoff.arabic} pric={splcoff.price}
-                                      pic={splcoff.picture}/>
-                            <br/>
-                        </div>
-                    );
-                })
-            }
-        </>
+ {          <>
 
 
-    </Container>
+                {
+                    splcoffee.map((splcoff) => {
+                        return (
+
+                            <div key={splcoff.id}>
+                                <br/>
+                                <MenuCard eng={splcoff.english} ar={splcoff.arabic} pric={splcoff.price}
+                                          pic={splcoff.picture}/>
+                                <br/>
+                            </div>
+                        );
+                    })
+                }
+            </>
+
+ }
+
+
+        </Container>
 
     </div>
 

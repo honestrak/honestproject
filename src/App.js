@@ -28,7 +28,7 @@ function App() {
 
     <Router>
         <header>
-            <TopBar/>
+            <TopBar naviItems = {naviItems}/>
         </header>
       <Routes>
       <Route path="/" element ={<Home naviItems = {naviItems}/>}/>

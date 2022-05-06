@@ -7,7 +7,6 @@ function Home(props) {
 
     const naviItems = props.naviItems;
 
-    console.log(naviItems);
 
 
     let navigate = useNavigate();
@@ -38,8 +37,11 @@ function Home(props) {
 
             <h2>
 
-                {naviItems.map((navi_items) => (
-                <Card sx={{
+                {
+                    naviItems.map((navi_items) => (
+                <Card
+                    key={navi_items.title}
+                    sx={{
                     minWidth: 345, borderRadius: '12px',
                     margin: 5,
                     boxShadow: 2,

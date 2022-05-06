@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -12,6 +11,7 @@ import {AppBar, Button, IconButton, ThemeProvider, Toolbar, Typography} from "@m
 import MenuIcon from "@mui/icons-material/Menu";
 import {createTheme} from "@mui/material/styles";
 import {deepOrange} from "@mui/material/colors";
+import {useNavigate } from "react-router-dom";
 
 
 const theme = createTheme({
@@ -24,13 +24,29 @@ const theme = createTheme({
 });
 
 
-export default function TopBar() {
+export default function TopBar({naviItems}) {
+
+
+    const naviItem = naviItems;
+
+    console.log("it : "+naviItem);
+
     const [state, setState] = React.useState({
         top: false,
         left: false,
         bottom: false,
         right: false,
     });
+
+    const navigate = useNavigate ();
+    const home = () => {
+        navigate("/");
+    }
+
+    const toComponentB = (catitem) => {
+        let path = `menu`;
+        navigate(path, { state: { id: 1, name: catitem} });
+    };
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (
@@ -53,7 +69,8 @@ export default function TopBar() {
         >
             <List>
                 {['Food', 'Beverages'].map((text, index) => (
-                    <ListItem button key={text}>
+                    <ListItem
+                        button key={text} onClick={ () => toComponentB(text)}>
                         <ListItemIcon>
                             {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
                         </ListItemIcon>
@@ -84,9 +101,13 @@ export default function TopBar() {
                                     sx={{mr: 2}}>
                                     <MenuIcon/>
                                 </IconButton>
-                                <Typography align="center" variant="h6" component="div" sx={{flexGrow: 1}}>
-                                    Cheval Cafe
-                                </Typography>
+
+
+                                {<Typography align="center" variant="h6" component="div" sx={{flexGrow: 1}}>
+                                    <Button onClick={home}
+                                            sx={{flexGrow: 1, fontSize: 20, color: 'white'}} align="center"
+                                            color="secondary"> Cheval Cafe</Button>
+                                </Typography>}
                             </Toolbar>
                         </AppBar>
 
