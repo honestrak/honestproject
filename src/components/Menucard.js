@@ -44,8 +44,17 @@ const theme = createTheme({
     },
 });
 
+let picture = "https://emenurak.com/emenu_images/cheval_cafe/cheval.png";
 
 function MenuCard(props) {
+
+
+    if(props.pic == undefined){
+        picture = "https://emenurak.com/emenu_images/cheval_cafe/cheval.png";
+    }
+    else{
+        picture = props.pic;
+    };
 
     return (
 
@@ -90,8 +99,9 @@ function MenuCard(props) {
                             maxWidth: {xs: 350, md: 350},
 
                         }}
-                        alt="pic"
-                        src={props.pic}
+                        alt="Cheval Cafe"
+
+                        src={picture}
                     />
 
                     <CardContent>
@@ -105,7 +115,7 @@ function MenuCard(props) {
                             }}
                         >
                             <Box component="span" sx={{ml: 1}}>
-                                <Typography variant="h5" align='center' sx={{fontWeight: 'bold', color: 'typo',}} >
+                                <Typography variant="h5" sx={{fontWeight: 'bold', color: 'typo',}} >
                                     {props.eng}
                                 </Typography>
                             </Box>

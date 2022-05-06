@@ -29,7 +29,6 @@ export default function TopBar({naviItems}) {
 
     const naviItem = naviItems;
 
-    console.log("it : "+naviItem);
 
     const [state, setState] = React.useState({
         top: false,

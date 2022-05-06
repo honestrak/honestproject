@@ -37,7 +37,7 @@ function CategoryList({english,id,setName,links}) {
                                     <Avatar
                                         sx={{bgcolor:'#f8f8f8', width: 48, height: 48 , p:2}}
                                         src="https://cdn1.iconfinder.com/data/icons/ecommerce-vol1-flat-bukeicon/32/burger_food_category_ecommerce_bukeicon_online_shop-512.png">C</Avatar>
-                                    <Typography variant="body1" color='red' align='center'>
+                                    <Typography variant="h6" color='white' align='center'>
                                         {english}
                                     </Typography>
                                 </IconButton>

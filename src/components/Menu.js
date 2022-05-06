@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {db} from '../firebase-config';
 import {collection, getDocs, query, where} from 'firebase/firestore';
 import MenuCard from "./Menucard";
-import {Box, CircularProgress, Container, Stack} from "@mui/material";
+import {Box, CircularProgress, Container, Divider, Stack} from "@mui/material";
 import {createTheme} from "@mui/material/styles";
 import {deepOrange} from "@mui/material/colors";
 import CategoryList from "./CategoryList";
@@ -22,7 +22,7 @@ function Menu() {
     const [splcoffee, setSpecialCoffee] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const [name, setName] = useState('desserts');
+    const [name, setName] = useState('items');
     const [topCategory, setTopCategory] = useState('');
 
     const chevalCollRef = collection(db, name);
@@ -40,26 +40,28 @@ function Menu() {
 
 
     useEffect(() => {
-        console.log("useeff_category");
         const getCategoryList = async (e) => {
             const querySnapshot = await getDocs(categFilter);
 
-            setCategoryList(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
+            setCategoryList(querySnapshot.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id        })));
 
-            console.log("abcd " + categoryList.length);
+            querySnapshot.docs.forEach((doc,index)=>{
+
+                if(index ==0){
+                    setName(doc.get('link'));
+                }
+
+            });
+
+
+
         }
 
         getCategoryList()
             .then(
             () => {
-
-                console.log("lengt " + categoryList.length);
-
-                console.log("0th  pos  " + categoryList[0]);
-                const first = categoryList[0];
-
-
-                setName(first.link);
 
                 if (length > 0) {
 
@@ -70,19 +72,14 @@ function Menu() {
                 }
 
             }
-        ).finally(
-            ()=>{
-                console.log("finally " + categoryList.length);
-            }
         )
 
-        console.log("zcxef " + categoryList.length);
     }, [cateType]);
 
 
     useEffect(() => {
 
-     //   console.log("useeffect: " + name);
+         setLoading(false)
         const getCoffee = async (e) => {
             const data = await getDocs(chevalCollRef);
             setSpecialCoffee(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
@@ -93,6 +90,7 @@ function Menu() {
 
         getCoffee().then(
             () => {
+                setLoading(true)
                 if (length > 0)
                     setLoading(true);
                 else
@@ -106,7 +104,9 @@ function Menu() {
 
 
         <Container maxWidth="xs" sx={{
-            bgcolor: 'rgb(236,236,236)',
+            backgroundImage: `url(${"https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg"})`,
+            backgroundRepeat:"no-repeat",
+            backgroundSize: "cover",
             minWidth: {
                 xs: 400,
                 md: 700,
@@ -130,14 +130,22 @@ function Menu() {
                    spacing={2}>
                 {
                     categoryList.map((category, index) => {
+
                         return (
-                            <CategoryList setName={setName} id={index} english={category.english}
+                            <div key={index}>
+                            <CategoryList
+                                setName={setName} id={index} english={category.english}
                                           links={category.link}/>
+                            </div>
                         );
                     })
                 }
+
+
             </Stack>
 
+            <Divider variant="middle" />
+            <div style={{ borderTop: "2px solid #fff ", marginLeft: 10, marginRight: 10 }}></div>
             <>
                 {loading ? '' :
 
