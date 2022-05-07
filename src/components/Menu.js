@@ -2,11 +2,12 @@ import {useEffect, useState} from "react";
 import {db} from '../firebase-config';
 import {collection, getDocs, query, where} from 'firebase/firestore';
 import MenuCard from "./Menucard";
-import {Box, CircularProgress, Container, Divider, Stack} from "@mui/material";
+import {Box, CircularProgress, Container, Divider, Grid, Stack} from "@mui/material";
 import {createTheme} from "@mui/material/styles";
 import {deepOrange} from "@mui/material/colors";
 import CategoryList from "./CategoryList";
 import {useLocation} from "react-router-dom";
+import Slider from "react-slick";
 
 
 const theme = createTheme({
@@ -37,6 +38,14 @@ function Menu() {
     const categFilter = query(refCategoryList, where("type", "==", cateType))
     const [categoryList, setCategoryList] = useState([]);
 
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
 
 
     useEffect(() => {
@@ -100,15 +109,17 @@ function Menu() {
     }, [name, cateType]);
 
 
-    return <div>
+    return <>
 
 
-        <Container maxWidth="xs" sx={{
+        <Container
+            maxWidth="xs"
+                   sx={{
             backgroundImage: `url(${"https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg"})`,
             backgroundRepeat:"no-repeat",
             backgroundSize: "cover",
             minWidth: {
-                xs: 400,
+                xs: 100,
                 md: 700,
                 xl: 900
             },
@@ -119,7 +130,6 @@ function Menu() {
         >
 
             <Stack justifyContent="center"
-                   alignItems="center"
                    direction="row"
                    alignItems="stretch"
                    sx={{
@@ -170,22 +180,31 @@ function Menu() {
                 }
             </>
 
- {          <>
+ {
 
+     <>
 
                 {
                     splcoffee.map((splcoff) => {
                         return (
 
                             <div key={splcoff.id}>
-                                <br/>
+
+
+
+
                                 <MenuCard eng={splcoff.english} ar={splcoff.arabic} pric={splcoff.price}
                                           pic={splcoff.picture}/>
-                                <br/>
+
+
+
+
                             </div>
                         );
                     })
                 }
+
+
             </>
 
  }
@@ -193,7 +212,7 @@ function Menu() {
 
         </Container>
 
-    </div>
+    </>
 
 
 }

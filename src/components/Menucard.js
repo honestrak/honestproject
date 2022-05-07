@@ -4,13 +4,14 @@ import {
     Card,
     CardActionArea,
     CardContent,
-    CardMedia,
+    CardMedia, Grid,
     Stack,
     ThemeProvider,
     Typography
 } from "@mui/material";
 import {createTheme} from "@mui/material/styles";
 import {deepOrange} from "@mui/material/colors";
+
 
 
 const theme = createTheme({
@@ -56,19 +57,25 @@ function MenuCard(props) {
         picture = props.pic;
     };
 
+
+
     return (
 
         <ThemeProvider theme={theme}>
 
+
+
         <Card sx={{
             display: 'flex',
             borderRadius: '12px',
+            flexDirection: 'row',
             overflow: 'hidden',
             alignItems: 'center',
             boxShadow: 2,
             bgcolor:'rgba(175,192,201,0.56)',
             ml: 5,
             mr: 5,
+            mt:5,
 
         }}>
             <CardActionArea onClick={() => console.log("welcome")}>
@@ -148,6 +155,8 @@ function MenuCard(props) {
                 </Box>
             </CardActionArea>
         </Card>
+
+
 
         </ThemeProvider>
     );
