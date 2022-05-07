@@ -2,12 +2,13 @@ import {useEffect, useState} from "react";
 import {db} from '../firebase-config';
 import {collection, getDocs, query, where} from 'firebase/firestore';
 import MenuCard from "./Menucard";
-import {Box, CircularProgress, Container, Divider, Grid, Stack} from "@mui/material";
+import {Box, CircularProgress, Container, css, Divider, Grid, Stack} from "@mui/material";
 import {createTheme} from "@mui/material/styles";
 import {deepOrange} from "@mui/material/colors";
 import CategoryList from "./CategoryList";
 import {useLocation} from "react-router-dom";
 import Slider from "react-slick";
+import './Menu.css';
 
 
 const theme = createTheme({
@@ -109,7 +110,9 @@ function Menu() {
     }, [name, cateType]);
 
 
-    return <>
+    return (
+
+    <>
 
 
         <Container
@@ -182,7 +185,7 @@ function Menu() {
 
  {
 
-     <>
+     <div className={"menuCard"}>
 
                 {
                     splcoffee.map((splcoff) => {
@@ -205,7 +208,7 @@ function Menu() {
                 }
 
 
-            </>
+            </div>
 
  }
 
@@ -213,7 +216,7 @@ function Menu() {
         </Container>
 
     </>
-
+    );
 
 }
 

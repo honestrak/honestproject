@@ -61,6 +61,8 @@ function MenuCard(props) {
 
     return (
 
+        <div>
+
         <ThemeProvider theme={theme}>
 
 
@@ -73,9 +75,11 @@ function MenuCard(props) {
             alignItems: 'center',
             boxShadow: 2,
             bgcolor:'rgba(175,192,201,0.56)',
-            ml: 5,
-            mr: 5,
-            mt:5,
+            ml: 3,
+            mr: 3,
+            mt:2,
+            mb:2,
+            minWidth:'350px',
 
         }}>
             <CardActionArea onClick={() => console.log("welcome")}>
@@ -88,6 +92,7 @@ function MenuCard(props) {
                         borderRadius: '12px',
                         boxShadow: 2,
                         bgcolor: '#f5f5f5',
+                        minWidth: {xs: '350px,', md: '600px'},
                         '&:hover': {
                             backgroundColor: '#ffffff',
                             opacity: [0.9, 0.8, 0.7],
@@ -159,6 +164,7 @@ function MenuCard(props) {
 
 
         </ThemeProvider>
+        </div>
     );
 
 }

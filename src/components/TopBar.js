@@ -7,10 +7,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import {AppBar, Button, IconButton, ThemeProvider, Toolbar, Typography} from "@mui/material";
+import {AppBar, Avatar, Button, CardActions, IconButton, ThemeProvider, Toolbar, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import {createTheme} from "@mui/material/styles";
-import {deepOrange} from "@mui/material/colors";
+import {deepOrange, red} from "@mui/material/colors";
 import {useNavigate } from "react-router-dom";
 
 
@@ -89,7 +89,7 @@ export default function TopBar({naviItems}) {
                 <ThemeProvider theme={theme}>
                     <Box sx={{flexGrow: 1}}>
 
-                        <AppBar color="primary" position="fixed">
+                        <AppBar color="primary" position="fixed"  align="center">
                             <Toolbar>
                                 <IconButton
                                     onClick={toggleDrawer('left', true)}
@@ -101,12 +101,15 @@ export default function TopBar({naviItems}) {
                                     <MenuIcon/>
                                 </IconButton>
 
+                                <Avatar  src="https://emenurak.com/librarycafe/images/header_logo.png"   >
 
-                                {<Typography align="center" variant="h6" component="div" sx={{flexGrow: 1}}>
+                                </Avatar>
+                                <Typography align="center" variant="h6" component="div" >
+
                                     <Button onClick={home}
-                                            sx={{flexGrow: 1, fontSize: 20, color: 'white'}} align="center"
+                                            sx={{ fontSize: 20, color: 'white'}}
                                             color="secondary"> Cheval Cafe</Button>
-                                </Typography>}
+                                </Typography>
                             </Toolbar>
                         </AppBar>
 

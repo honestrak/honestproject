@@ -1,17 +1,14 @@
 import Container from "@mui/material/Container";
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import './Home.css';
 
 
 function Home(props) {
 
     const naviItems = props.naviItems;
 
-    const styles = {
-        paperContainer: {
-            backgroundImage: `url(${"static/src/img/main.jpg"})`
-        }
-    };
+
 
     let navigate = useNavigate();
 
@@ -22,19 +19,17 @@ function Home(props) {
     };
 
 
-    return (<div>
+    return (<div   className="bg-image">
 
 
             <Container
+
                 maxWidth="md"
                 sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: {xs: 'center', md: 'center'},
-                    height: '85vh',
-                    backgroundImage: `url(${"https://image.shutterstock.com/image-photo/abstract-blur-coffee-shop-cafe-600w-1928243432.jpg"})`,
-                    backgroundRepeat:"no-repeat",
-                    backgroundSize: "cover",
+                    backgroundImage: `url(${"https://images.pexels.com/photos/6894905/pexels-photo-6894905.jpeg"})`,
                     minWidth: {
                         xs: 400,
                         md: 700,
@@ -43,7 +38,7 @@ function Home(props) {
                 }}
             >
 
-                <h2>
+                <h2        >
 
                     {
                         naviItems.map((navi_items) => (

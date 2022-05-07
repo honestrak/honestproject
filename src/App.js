@@ -39,9 +39,14 @@ function App() {
         <ThemeProvider theme={theme}>
         <footer >
             <Box sx={{bgcolor: 'primary.main', mt: 1, p: 1}}>
-                <Typography variant="body1" color='white' align='center'>
+                <Typography variant="body2" color='white' align='center'>
                     All Rights Reserved @ Cheval_Cafe
-                </Typography>;
+                </Typography>
+
+
+                <Typography variant="body2" color='white' align='center'>
+                    Designed & Developed by  <a style={{color: 'white'}} href={"https://honestrak.com/"}>Honest IT Solutions LLC</a>
+                </Typography>
             </Box>
         </footer>
         </ThemeProvider>
